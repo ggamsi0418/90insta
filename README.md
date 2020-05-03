@@ -36,6 +36,5 @@
 - config/authentication.py ==> `func login_validate`
 
 ## 추가
-- 공통 포트폴리오: https://www.evernote.com/l/AlNZUvMm1ztLobC9e8OVqFd57TddHWK7_Y8/
 - Front-end: https://github.com/90factory/3rd_90Insta_Frontend
 - nodeJS: https://github.com/90factory/3rd_90Insta_nodeJS
