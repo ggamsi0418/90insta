@@ -29,19 +29,12 @@ class SignUpView(APIView):
     """ 일반 회원 가입 """
 
     def post(self, request):
-        print(vars(request))
-        print(type(request))
         # data = json.load(request.body) # postman에서 raw로 받을 때 사용...
         data = request.data
-        print(data)
         user_type = "GENERAL"
         email = data['email']
         password = data['password']
         nickname = data['nickname']
-
-        print(email)
-        print(password)
-        print(nickname)
 
         try:
 
@@ -130,16 +123,12 @@ class SignInView(APIView):
 
     def post(self, request):
         # data = json.loads(request.body) # postman에서 raw로 받을 때 사용..
-        print("request 헤더입니다: ", request.headers)
         data = request.data
         input_email = data['email']
         input_password = data['password']
 
         if input_email == "" or input_password == "":
             return Response({"message": "빈 칸 없이 모두 입력해 주시기 바랍니다."}, status=status.HTTP_400_BAD_REQUEST)
-
-        print(input_email)
-        print(input_password)
 
         try:
             validate_email(input_email)
@@ -296,20 +285,9 @@ class ProfileEditView(APIView):
 
         # http://현재도메인:8000/image/{user pk}/이미지이름.jpg
         try:
-            print(image)
-            print(image.url)
-            print(image.path)
-            print("현재 host: ", request.get_host())
             image_url = f"http://{request.get_host()}{image.url}"
         except ValueError:
             image_url = ""
-        except Exception as e:
-            print("에러 발생: ", e)
-
-        print("image: ", image)
-        print("name: ", name)
-        print("nickname: ", nickname)
-        print("intro: ", intro)
 
         data = {
             "image": image_url,
@@ -330,12 +308,6 @@ class ProfileEditView(APIView):
         name = request.POST.get('name')
         nickname = request.POST.get('nickname')
         intro = request.POST.get('intro')
-
-        print("image 타입: ", type(image))
-        print("image: ", image)
-        print("name: ", name)
-        print("nickname: ", nickname)
-        print("intro: ", intro)
 
         if nickname == "":
             return Response({"message": "nickname을 입력하셔야 합니다."}, status=status.HTTP_400_BAD_REQUEST)
